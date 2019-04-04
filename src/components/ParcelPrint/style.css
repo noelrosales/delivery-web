@@ -1,0 +1,79 @@
+/* Parcel Summary */
+.parcel-summary-print{
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+    border: 1px solid red;
+    width: 5.4in;
+    height: 4.048in;
+}
+
+    .parcel-summary-print > div{
+        display: flex
+    }
+
+    .parcel-summary-print .parcel-summary-delivery-detail {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .parcel-summary-delivery-detail {
+        flex: 1;
+        padding-left: 20px
+    }
+
+/*Sub parcel*/
+.parcel-print {
+    display: flex;
+    padding:10px;
+    border: 1px dashed #333;
+    width: 5.4in;
+    height: 4.04in;
+}
+
+    .parcel-print .qr-code{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between
+    }
+
+    .parcel-print .delivery-detail{
+        flex:1;
+        padding-left: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .header-logos{
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0px 30px 0px;
+        }
+
+        .header-logos img{
+            height: 30px;
+        }
+
+        .parcel-print .recipient-details{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex:1
+        }
+
+        .recipient-details h2{
+            margin-top: -15px
+        }
+
+        .parcel-count{
+            display: flex;
+            justify-content: flex-start
+        }
+
+/* Print Setup */
+@media print{
+    .parcel-summary-qr-code table{
+        font-size: .7em
+    }
+}

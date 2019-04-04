@@ -1,0 +1,19 @@
+.bread-crumbs ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+.bread-crumbs ul li {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.bread-crumbs ul li.active{
+    color: #333;
+    cursor: auto
+}
+
+.bread-crumbs ul li:not(.active){
+    color: #2196F3;
+}

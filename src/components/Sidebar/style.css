@@ -1,0 +1,34 @@
+.Sidebar{
+    height: 90vh;
+    border-right: 1px solid rgb(224, 224, 224);
+    background: #fff
+}
+
+aside ul{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+aside ul li {
+    justify-content: flex-end
+}
+
+aside ul li a{
+    display: block;
+    text-decoration: none;
+    color: rgba(0,0,0,.55);
+    padding: 20px;
+    transition: all .25s ease-in-out;
+}
+
+aside ul li a:hover{
+    background: teal;
+    color: #fff;
+}
+
+aside ul li a.active{
+    background: #f4f4f4;
+    color: teal;
+    border-left: 10px solid teal
+}

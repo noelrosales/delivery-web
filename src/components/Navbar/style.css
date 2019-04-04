@@ -1,0 +1,13 @@
+nav{
+    background: teal;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    color: #fff;
+    height: 10vh;
+}
+
+nav h2{
+    margin: 0px 0px;
+}
