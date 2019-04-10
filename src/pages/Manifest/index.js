@@ -92,9 +92,10 @@ class Manifest extends Component {
             .then(res => {
                 if(res.data.success === true) {
                     console.log('PACKAGES',res.data.data.list);
+                    console.log('CAN PRINT/DOWNLOAD',res.data.data.printManifest)
                     this.setState({
                         packages: res.data.data.list,
-                        printManifest: res.data.data.print | false,
+                        printManifest: res.data.data.printManifest | false,
                         step: 2
                     })
                 } else {

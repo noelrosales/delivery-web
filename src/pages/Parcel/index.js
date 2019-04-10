@@ -177,8 +177,8 @@ class Parcel extends Component {
                     })
                 } else {
                     alert("Something went wrong. Please sign in.");
-                    // localStorage.clear();
-                    // this.props.history.push('/login')
+                    localStorage.clear();
+                    this.props.history.push('/login')
                 }
             })
             .catch( err => console.log(err) )
