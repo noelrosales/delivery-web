@@ -133,7 +133,7 @@ class Manifest extends Component {
                     <div className="w3-container">
                         <div className="bread-crumbs">
                             <ul>
-                                { this.state.step >= 1 ? <li  className={this.state.step === 1 ? 'active' : ''} onClick={()=>this.setState({step:1})}>Select Trip /</li> : null}
+                                { this.state.step >= 1 ? <li  className={this.state.step === 1 ? 'active' : ''} onClick={()=>this.setState({step:1})}>Select Trip /</li>: null}
                                 { this.state.step >= 2 ? <li  className={this.state.step === 2 ? 'active' : ''} onClick={()=>this.setState({step:2})}>Select Package /</li> : null}
                                 { this.state.step >= 3 ? <li  className={this.state.step === 3 ? 'active' : ''} onClick={()=>this.setState({step:3})}>Package Preview /</li> : null}
                                 { this.state.step === 4 ? <li className={this.state.step === 4 ? 'active' : ''}>Print </li> : null}
@@ -216,7 +216,7 @@ class Manifest extends Component {
                             this.state.step === 2 ?
                                 <div className="w3-row-padding" style={{overflowX: 'auto'}}>
                                     <ReactToPrint
-                                        trigger={() => <button className="w3-btn w3-green" disabled={this.state.printManifest ? false : true}>PRINT</button>}
+                                        trigger={() => <button className="w3-btn w3-green" disabled={this.state.printManifest ? false : true}><i className="fas fa-print"></i> PRINT</button>}
                                         content={() => this.refs.report}
                                         onBeforePrint={()=>{
                                             //test: 03-27-2019
@@ -227,7 +227,7 @@ class Manifest extends Component {
                                         className="w3-btn w3-blue" 
                                         disabled={this.state.printManifest ? false : true} 
                                         onClick={this.exportPDF}>
-                                        DOWNLOAD
+                                        <i className="fas fa-download"></i> DOWNLOAD
                                     </button>
 
                                     <PDFExport paperSize={['8.5in','13in']}
@@ -319,6 +319,7 @@ class Manifest extends Component {
                                         className="w3-btn w3-green"
                                         onClick={() => this.setState({step: 4})}
                                     >
+                                        <i className="fas fa-print"></i>
                                         Print
                                     </button>
                                 </div> : null
@@ -330,7 +331,7 @@ class Manifest extends Component {
                                     <h1>Print</h1>
                                     <ParcelPrint ref="print" parcelData={this.state.printDetails}/> 
                                     <ReactToPrint
-                                        trigger={() => <button className="w3-btn w3-green">Print</button>}
+                                        trigger={() => <button className="w3-btn w3-green"><i className="fas fa-print"></i>Print</button>}
                                         content={() => this.refs.print}
                                     />
                                     <button 

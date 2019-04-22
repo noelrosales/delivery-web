@@ -112,7 +112,13 @@ class Parcel extends Component {
 
         ParcelService.getDynamicPrice(busCompanyId, parseInt(estimatedValue), endStation, accompanied, startStation, parseInt(packageWeight))
             .then(res => {
+                //TASK: Apply dynamic price
                 console.log(res.data)
+                if(res.data.success){
+                    console.log(res.data)
+                    //Disable price field and aplly dynamic price
+                    // this.setState({price: 4000})
+                }
             })
             .catch(err => {
                 console.log(err)
@@ -227,6 +233,16 @@ class Parcel extends Component {
                 <div className="w3-card-4">
                     <h1 className="w3-blue w3-container">Create Parcel (Step {this.state.step})</h1>
                     <div className="w3-container">
+                        <div className="bread-crumbs">
+                            <ul>
+                                { this.state.step >= 1 ? <li  className={this.state.step === 1 ? 'active' : ''} onClick={()=>this.setState({step:1})}>Create Parcel Details /</li> : null}
+                                { this.state.step >= 2 ? <li  className={this.state.step === 2 ? 'active' : ''} onClick={()=>this.setState({step:2})}>Take Parcel Image /</li> : null}
+                                { this.state.step >= 3 ? <li  className={this.state.step === 3 ? 'active' : ''} onClick={()=>this.setState({step:3})}>Select Trip /</li> : null}
+                                { this.state.step >= 4 ? <li className={this.state.step === 4 ? 'active' : ''} onClick={()=>this.setState({step:4})}>Destination /</li> : null}
+                                { this.state.step >= 5 ? <li className={this.state.step === 5 ? 'active' : ''} onClick={()=>this.setState({step:5})}>Parcel Preview /</li> : null}
+                                { this.state.step === 6 ? <li className={this.state.step === 6 ? 'active' : ''}>Print </li> : null}
+                            </ul>
+                        </div>
                         {
                             this.state.step === 1 
                                 ? <CreateParcelForm createData={this.state} handleChange={this.handleChange}/> 
@@ -337,7 +353,7 @@ class Parcel extends Component {
                                 this.state.step === 6 ? 
                                     <div>
                                         <ReactToPrint
-                                            trigger={() => <button className="w3-btn w3-green">Print</button>}
+                                            trigger={() => <button className="w3-btn w3-green"><i class="fas fa-print"></i> Print</button>}
                                             content={() => this.refs.print}
                                         />
                                         <button onClick={()=>this.setState(this.initialState)} className="w3-btn w3-blue">Save</button>

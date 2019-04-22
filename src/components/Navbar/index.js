@@ -30,7 +30,7 @@ class Navbar extends Component {
                 <h2>Delivery App</h2>
                 <div style={{display:'flex'}}>
                     <h4>Welcome, {user.personalInfo.fullName} </h4>
-                    <button className="w3-btn w3-green w3-margin-left" onClick={()=>this.handleClick()}>Logout</button>
+                    <button className="w3-btn w3-green w3-margin-left" onClick={()=>this.handleClick()}><i className="fas fa-sign-out-alt"></i> Logout</button>
                 </div>
             </nav>
         );

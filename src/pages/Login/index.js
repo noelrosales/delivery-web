@@ -92,12 +92,13 @@ class Login extends Component {
                         <label>Password</label>
                         <input ref="password" className="w3-input" type="password" name="password" required onChange={this.handleChange}/>
                         <br />
-                        <input 
+                        <button
                             className="w3-btn w3-blue" 
                             type="submit"
                             disabled={ this.state.loading ? true : false}
-                            value={this.state.loading ? 'LOGGING IN' : 'LOGIN'}
-                        />
+                        >
+                        <i class="fas fa-sign-in-alt"></i> {this.state.loading ? 'LOGGING IN' : 'LOGIN'}
+                        </button>
                     </div>
                 </form>
             </div>

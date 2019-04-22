@@ -1,3 +1,7 @@
+.bread-crumbs{
+    background: #f4f4f4;
+}
+
 .bread-crumbs ul {
     list-style: none;
     padding: 0;
