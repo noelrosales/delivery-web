@@ -113,11 +113,10 @@ class Parcel extends Component {
         ParcelService.getDynamicPrice(busCompanyId, parseInt(estimatedValue), endStation, accompanied, startStation, parseInt(packageWeight))
             .then(res => {
                 //TASK: Apply dynamic price
-                console.log(res.data)
                 if(res.data.success){
-                    console.log(res.data)
-                    //Disable price field and aplly dynamic price
-                    // this.setState({price: 4000})
+                    const computedPrice = res.data.data.totalCost;
+                    console.log('DYNAMIC PRICE: ',computedPrice)
+                    this.setState({price: computedPrice})
                 }
             })
             .catch(err => {
@@ -147,16 +146,21 @@ class Parcel extends Component {
         const dynamicPriceParams = ['endStation', 'accompanied', 'packageWeight', 'estimatedValue'];
         
         if(e.target.type === 'checkbox') {
-            this.setState({
-                [e.target.name] : e.target.checked
-            },() => this.getDynamicPrice())
+            if(dynamicPriceParams.indexOf(e.target.name) != -1){
+                this.setState({
+                    [e.target.name] : e.target.checked
+                },() => this.getDynamicPrice())
+            } else {
+                this.setState({
+                    [e.target.name] : e.target.checked
+                })
+            }
         } else if(e.target.type === 'file'){
             this.setState({
                 [e.target.name] : e.target.files[0]
             })
         }else {
             if(dynamicPriceParams.indexOf(e.target.name) != -1){
-                console.log('VALID', e.target.value)
                 this.setState({
                     [e.target.name] : e.target.value
                 },() => this.getDynamicPrice())
@@ -239,8 +243,7 @@ class Parcel extends Component {
                                 { this.state.step >= 2 ? <li  className={this.state.step === 2 ? 'active' : ''} onClick={()=>this.setState({step:2})}>Take Parcel Image /</li> : null}
                                 { this.state.step >= 3 ? <li  className={this.state.step === 3 ? 'active' : ''} onClick={()=>this.setState({step:3})}>Select Trip /</li> : null}
                                 { this.state.step >= 4 ? <li className={this.state.step === 4 ? 'active' : ''} onClick={()=>this.setState({step:4})}>Destination /</li> : null}
-                                { this.state.step >= 5 ? <li className={this.state.step === 5 ? 'active' : ''} onClick={()=>this.setState({step:5})}>Parcel Preview /</li> : null}
-                                { this.state.step === 6 ? <li className={this.state.step === 6 ? 'active' : ''}>Print </li> : null}
+                                { this.state.step === 5 ? <li className={this.state.step === 5 ? 'active' : ''} onClick={()=>this.setState({step:5})}>Parcel Preview /</li> : null}
                             </ul>
                         </div>
                         {
@@ -353,7 +356,7 @@ class Parcel extends Component {
                                 this.state.step === 6 ? 
                                     <div>
                                         <ReactToPrint
-                                            trigger={() => <button className="w3-btn w3-green"><i class="fas fa-print"></i> Print</button>}
+                                            trigger={() => <button className="w3-btn w3-green"><i className="fas fa-print"></i> Print</button>}
                                             content={() => this.refs.print}
                                         />
                                         <button onClick={()=>this.setState(this.initialState)} className="w3-btn w3-blue">Save</button>

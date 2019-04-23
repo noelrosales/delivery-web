@@ -97,7 +97,7 @@ class Login extends Component {
                             type="submit"
                             disabled={ this.state.loading ? true : false}
                         >
-                        <i class="fas fa-sign-in-alt"></i> {this.state.loading ? 'LOGGING IN' : 'LOGIN'}
+                        <i className="fas fa-sign-in-alt"></i> {this.state.loading ? 'LOGGING IN' : 'LOGIN'}
                         </button>
                     </div>
                 </form>

@@ -4,11 +4,11 @@ import './style.css'
 const ParcelPreview = ({parcelData}) => {
   return (
     <div className="parcel-preview">
-        <h1>Parcel Details</h1>
+        <h4>Parcel Details</h4>
         <div className="parcel-details w3-row">
             <img className="w3-col m4" src={parcelData.packageImage ? parcelData.packageImagePreview : parcelData.packageInfo.packageImages[0]} alt="package" />
             <div className="w3-col m8 w3-container">
-                <h2>Package Details</h2>
+                <h5>Package Details</h5>
                 <table className="w3-table striped">
                     <tbody>
                         <tr>
@@ -36,7 +36,7 @@ const ParcelPreview = ({parcelData}) => {
             </div>
         </div>
 
-        <h2>Sender Details</h2>
+        <h5>Sender Details</h5>
         <table className="w3-table striped">
             <tbody>
                 <tr>
@@ -54,7 +54,7 @@ const ParcelPreview = ({parcelData}) => {
             </tbody>
         </table>
 
-        <h2>Recepient Details</h2>
+        <h5>Recepient Details</h5>
         <table className="w3-table">
             <tbody>
                 <tr>

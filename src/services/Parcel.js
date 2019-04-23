@@ -46,6 +46,7 @@ const ParcelService = {
         bodyFormData.set('tripId', parcelData.tripId)
         bodyFormData.set('startStation', parcelData.startStation)
         bodyFormData.set('endStation', parcelData.endStation)
+        bodyFormData.set('checkIn', parcelData.checkIn)
                 
         return axios({
             method: 'post',

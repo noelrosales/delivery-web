@@ -1,0 +1,23 @@
+import axios from 'axios';
+import Config from '../util/Config';
+
+const Scan = {
+    scanCode : (scanCode, tripId, scanType) => {
+        return axios({
+            method: 'post',
+            url: `${Config.api_domain}/server/api/v1/account/delivery-person/parcel/scan`,
+            headers: {
+                'x-auth-deviceid' : '1',
+                'x-auth-devicetype' : '1',
+                'x-auth-token' : Config.api_token
+            },
+            data: {
+                scanCode: scanCode,
+                tripId: tripId,
+                scanType: scanType
+            }
+        })
+    }
+}
+
+export default Scan
