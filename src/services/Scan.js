@@ -17,6 +17,37 @@ const Scan = {
                 scanType: scanType
             }
         })
+    },
+
+    scanSubParcel : (subParcelId) => {
+        return axios({
+            method: 'post',
+            url: `${Config.api_domain}/server/api/v1/account/delivery-person/parcel/subParcelTagging`,
+            headers: {
+                'x-auth-deviceid' : '1',
+                'x-auth-devicetype' : '1',
+                'x-auth-token' : Config.api_token
+            },
+            data: {
+                subParcelId: subParcelId
+            }
+        })
+    },
+
+    verifyClaimOTP : (parcelId, otp) => {
+        return axios({
+            method: 'post',
+            url: `${Config.api_domain}/server/api/v1/account/delivery-person/parcel/{parcelId}/verify-claim-otp`,
+            headers: {
+                'x-auth-deviceid' : '1',
+                'x-auth-devicetype' : '1',
+                'x-auth-token' : Config.api_token
+            },
+            data: {
+                parcelId: parcelId,
+                otp: otp
+            }
+        })
     }
 }
 

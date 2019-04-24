@@ -146,7 +146,7 @@ class Parcel extends Component {
         const dynamicPriceParams = ['endStation', 'accompanied', 'packageWeight', 'estimatedValue'];
         
         if(e.target.type === 'checkbox') {
-            if(dynamicPriceParams.indexOf(e.target.name) != -1){
+            if(dynamicPriceParams.indexOf(e.target.name) !== -1){
                 this.setState({
                     [e.target.name] : e.target.checked
                 },() => this.getDynamicPrice())
@@ -160,7 +160,7 @@ class Parcel extends Component {
                 [e.target.name] : e.target.files[0]
             })
         }else {
-            if(dynamicPriceParams.indexOf(e.target.name) != -1){
+            if(dynamicPriceParams.indexOf(e.target.name) !== -1){
                 this.setState({
                     [e.target.name] : e.target.value
                 },() => this.getDynamicPrice())
@@ -232,27 +232,28 @@ class Parcel extends Component {
     }
 
     render() { 
+        const {step} = this.state;
         return (
             <div className="w3-container Parcel">
                 <div className="w3-card-4">
-                    <h1 className="w3-blue w3-container">Create Parcel (Step {this.state.step})</h1>
+                    <h1 className="w3-blue w3-container">Create Parcel (Step {step})</h1>
                     <div className="w3-container">
                         <div className="bread-crumbs">
                             <ul>
-                                { this.state.step >= 1 ? <li  className={this.state.step === 1 ? 'active' : ''} onClick={()=>this.setState({step:1})}>Create Parcel Details /</li> : null}
-                                { this.state.step >= 2 ? <li  className={this.state.step === 2 ? 'active' : ''} onClick={()=>this.setState({step:2})}>Take Parcel Image /</li> : null}
-                                { this.state.step >= 3 ? <li  className={this.state.step === 3 ? 'active' : ''} onClick={()=>this.setState({step:3})}>Select Trip /</li> : null}
-                                { this.state.step >= 4 ? <li className={this.state.step === 4 ? 'active' : ''} onClick={()=>this.setState({step:4})}>Destination /</li> : null}
-                                { this.state.step === 5 ? <li className={this.state.step === 5 ? 'active' : ''} onClick={()=>this.setState({step:5})}>Parcel Preview /</li> : null}
+                                { step >= 1 && step !== 6 ? <li  className={step === 1 ? 'active' : ''} onClick={()=>this.setState({step:1})}>Create Parcel Details /</li> : null}
+                                { step >= 2 && step !== 6 ? <li  className={step === 2 ? 'active' : ''} onClick={()=>this.setState({step:2})}>Take Parcel Image /</li> : null}
+                                { step >= 3 && step !== 6 ? <li  className={step === 3 ? 'active' : ''} onClick={()=>this.setState({step:3})}>Select Trip /</li> : null}
+                                { step >= 4 && step !== 6 ? <li className={step === 4 ? 'active' : ''} onClick={()=>this.setState({step:4})}>Destination /</li> : null}
+                                { step === 5 ? <li className={step === 5 ? 'active' : ''} onClick={()=>this.setState({step:5})}>Parcel Preview /</li> : null}
                             </ul>
                         </div>
                         {
-                            this.state.step === 1 
+                            step === 1 
                                 ? <CreateParcelForm createData={this.state} handleChange={this.handleChange}/> 
                                 : null
                         }
                         {
-                            this.state.step === 2 ?
+                            step === 2 ?
                                 <div>
                                     <h1>Parcel Image</h1>
                                     <div className="step-2">
@@ -284,7 +285,7 @@ class Parcel extends Component {
                                 </div> : null
                         }
                         {
-                            this.state.step === 3 ?
+                            step === 3 ?
                                 <div>
                                     <h1>Select Bus</h1>
                                     {this.state.busses.length === 0 ? this.state.loading ? this.renderLoading('Loading trips.') : null : null}
@@ -323,7 +324,7 @@ class Parcel extends Component {
                                 </div> : null
                         }
                         {
-                            this.state.step === 4 ?
+                            step === 4 ?
                                 <div>
                                     <h1>Package Destination</h1>
                                     <div className="destination-list">
@@ -332,14 +333,14 @@ class Parcel extends Component {
                                 </div> : null
                         }
                         {
-                            this.state.step === 5 ? 
+                            step === 5 ? 
                                 <div>
                                     <ParcelPreview parcelData={this.state}/>  
                                     {
                                         this.state.loading 
                                             ? this.renderLoading('Creating parcel, please wait.')
                                             : <div>
-                                                <div className="w3-row-padding w3-third">
+                                                <div className="w3-row-padding">
                                                     <button className="w3-btn w3-green" onClick={()=>this.handleSubmit()}>Create Parcel</button>
                                                     <input className="w3-check" type="checkbox" name="checkIn"  onChange={this.handleChange}/>
                                                     <label>Check In</label>
@@ -349,11 +350,11 @@ class Parcel extends Component {
                                 </div> : null
                         }
                         {
-                            this.state.step === 6 ? <ParcelPrint ref="print" parcelData={this.state.createdParcel}/> : null
+                            step === 6 ? <ParcelPrint ref="print" parcelData={this.state.createdParcel}/> : null
                         }
                         <div style={{marginTop: '20px', marginBottom: '20px'}}>
                             {
-                                this.state.step === 6 ? 
+                                step === 6 ? 
                                     <div>
                                         <ReactToPrint
                                             trigger={() => <button className="w3-btn w3-green"><i className="fas fa-print"></i> Print</button>}
@@ -362,9 +363,9 @@ class Parcel extends Component {
                                         <button onClick={()=>this.setState(this.initialState)} className="w3-btn w3-blue">Save</button>
                                     </div>:
                                     <div>
-                                        <button disabled={ this.state.step === 1 } className="w3-btn w3-red" onClick={this.prevStep}>Previous Step</button>
-                                        <button disabled={ this.state.step === 5 } className="w3-btn w3-blue" onClick={this.nextStep}>
-                                            {this.state.step === 4 ? 'Parcel Preview' : 'Next Step'}
+                                        <button disabled={ step === 1 } className="w3-btn w3-red" onClick={this.prevStep}>Previous Step</button>
+                                        <button disabled={ step === 5 } className="w3-btn w3-blue" onClick={this.nextStep}>
+                                            {step === 4 ? 'Parcel Preview' : 'Next Step'}
                                         </button>
                                     </div>
                             }

@@ -33,7 +33,6 @@ class App extends Component {
     User.validateToken(token)
       .then(res => {
         if(this._isMounted){
-          console.log(res.data)
           const auth = res.data.success;
           
           if(!auth){

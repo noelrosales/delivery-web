@@ -1,9 +1,19 @@
 import React from 'react';
 import './style.css'
+import { QRCode } from 'react-qr-svg';
 
 const ParcelPreview = ({parcelData}) => {
   return (
     <div className="parcel-preview">
+        {parcelData.scanCode
+            ? <QRCode
+                style={{width: 150}}
+                level="Q"
+                value={parcelData.scanCode}
+              />
+            : null
+        }
+        
         <h4>Parcel Details</h4>
         <div className="parcel-details w3-row">
             <img className="w3-col m4" src={parcelData.packageImage ? parcelData.packageImagePreview : parcelData.packageInfo.packageImages[0]} alt="package" />

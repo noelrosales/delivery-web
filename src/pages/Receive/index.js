@@ -78,7 +78,6 @@ class Receive extends Component {
             this.setState({
                 billOfLading: data
             }, () => {
-                console.log(this.state.result);
                 this.scanCode(billOfLading, tripId, scanType);
             })
         }
@@ -91,7 +90,7 @@ class Receive extends Component {
     }
     
     render() { 
-        const {trips, packages, selectedPackage,billOfLading, step} = this.state;
+        const {trips, packages, selectedPackage, billOfLading, receivedCount, totalCount, step} = this.state;
         return (
             <div className="w3-container">
                 <div className="w3-card-4 receive">
@@ -131,10 +130,14 @@ class Receive extends Component {
                         }
                         { step === 2
                             ? <div>
+                                <p>{totalCount} Total</p>
+                                <p>{receivedCount} Received</p>
                                 <button 
                                     className="w3-btn w3-blue"
                                     onClick={()=>this.setState({step:4})}
-                                >Scan QR Code</button>
+                                >
+                                    <i className="fas fa-qrcode"></i> Scan QR Code
+                                </button>
                                 <br/><br/>
                                 {packages.map((_package,i) => {
                                     console.log(_package.packageInfo.packageName);

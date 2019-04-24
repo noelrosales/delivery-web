@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import './style.css';
 
@@ -28,7 +27,6 @@ class Login extends Component {
     }
 
     handleChange = (e) => {
-        console.log(e.target.name);
         this.setState({
             [e.target.name] : e.target.value
         })
