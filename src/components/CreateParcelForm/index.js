@@ -46,14 +46,30 @@ class CreateParcelForm extends Component {
                 </div> 
 
                 <div className="w3-row-padding">
+                    <div className="w3-row-padding w3-third">
+                        <label>Destination</label>
+                        <select className="w3-input" name="endStation" value={createData.endStation} onChange={handleChange}>
+                            <option value="">SELECT STATION</option>
+                            {
+                                createData.uniqueStations.map((station, index) => {
+                                    return <option key={index} value={station.endStationId}>{station.endStationName}</option>
+                                })
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div className="w3-row-padding">
                     <div className="w3-third">
-                        <label>Package Name</label>
+                        <label>Description</label>
                         <input className="w3-input" type="text" name="packageName" value={createData.packageName} onChange={handleChange}/>
                     </div>
-
-                    <div className="w3-third">
-                        <label>Package Weight (kg)</label>
-                        <input className="w3-input" type="number" name="packageWeight" value={createData.packageWeight} onChange={handleChange}/>
+                </div>
+                
+                <div className="w3-row-padding">
+                    <div className="w3-row-padding w3-third">
+                        <label>Declared Value</label>
+                        <input className="w3-input" type="number" name="estimatedValue" value={createData.estimatedValue} onChange={handleChange}/>
                     </div>
 
                     <div className="w3-row-padding w3-third">
@@ -63,13 +79,6 @@ class CreateParcelForm extends Component {
                             <option value="Insurance 10%">Insurance 1</option>
                             <option value="none">None</option>
                         </select>
-                    </div>
-                </div>
-                
-                <div className="w3-row-padding">
-                    <div className="w3-row-padding w3-third">
-                        <label>Estimated Value</label>
-                        <input className="w3-input" type="number" name="estimatedValue" value={createData.estimatedValue} onChange={handleChange}/>
                     </div>
 
                     <div className="w3-row-padding w3-third">
@@ -86,7 +95,7 @@ class CreateParcelForm extends Component {
                     </div>
 
                     <div className="w3-row-padding w3-third">
-                        <label>Price</label>
+                        <label>Shipping Cost</label>
                         <input className="w3-input" type="number" name="price" value={createData.price} onChange={handleChange}/>
                     </div>
                 </div>
@@ -112,16 +121,9 @@ class CreateParcelForm extends Component {
                 </div>
 
                 <div className="w3-row-padding">
-                    <div className="w3-row-padding w3-third">
-                        <label>Destination</label>
-                        <select className="w3-input" name="endStation" value={createData.endStation} onChange={handleChange}>
-                            <option value="">SELECT STATION</option>
-                            {
-                                createData.uniqueStations.map((station, index) => {
-                                    return <option key={index} value={station.endStationId}>{station.endStationName}</option>
-                                })
-                            }
-                        </select>
+                    <div className="w3-third">
+                        <label>Package Weight (kg)</label>
+                        <input className="w3-input" type="number" name="packageWeight" value={createData.packageWeight} onChange={handleChange}/>
                     </div>
                 </div>
             </div>

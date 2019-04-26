@@ -143,7 +143,7 @@ class Parcel extends Component {
     }
 
     setInsuranceFee = () => {
-        const {price, estimatedValue, packageInsurance} = this.state;
+        const {estimatedValue, packageInsurance} = this.state;
         this.setState({
             insuranceFee: packageInsurance === "Insurance 10%" ? estimatedValue * .1 : 0
         })

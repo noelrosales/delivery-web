@@ -37,7 +37,7 @@ const ParcelPreview = ({parcelData}) => {
                         </tr>
 
                         <tr>
-                            <td>Price : </td>
+                            <td>Shipping Cost : </td>
                             <td>{parcelData.price ? parcelData.price : parcelData.priceDetails.price}</td>
                         </tr>
 
@@ -49,6 +49,11 @@ const ParcelPreview = ({parcelData}) => {
                         <tr>
                             <td>Insurance Fee : </td>
                             <td>{parcelData.insuranceFee ? parcelData.insuranceFee : parcelData.priceDetails.insuranceFee}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Total Shipping Cost : </td>
+                            <td>{parcelData.price ? parseInt(parcelData.price) + parseInt(parcelData.insuranceFee) + parseInt(parcelData.convenienceFee) : parcelData.priceDetails.totalPrice}</td>
                         </tr>
                     
                         <tr>
