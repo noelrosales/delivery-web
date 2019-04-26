@@ -25,18 +25,32 @@ const ParcelPreview = ({parcelData}) => {
                             <td>Package Name : </td>
                             <td>{parcelData.packageName ? parcelData.packageName : parcelData.packageInfo.packageName}</td>
                         </tr>
+
                         <tr>
                             <td>Number of Parcels : </td>
                             <td>{parcelData.quantity ? parcelData.quantity : parcelData.packageInfo.quantity}</td>
                         </tr>
+
                         <tr>
                             <td>Weight : </td>
                             <td>{parcelData.packageWeight ? parcelData.packageWeight : parcelData.packageInfo.packageWeight}</td>
                         </tr>
+
                         <tr>
                             <td>Price : </td>
-                            <td>{parcelData.price ? parcelData.price : parcelData.priceDetails.totalPrice}</td>
+                            <td>{parcelData.price ? parcelData.price : parcelData.priceDetails.price}</td>
                         </tr>
+
+                        <tr>
+                            <td>Convenience Fee : </td>
+                            <td>{parcelData.convenienceFee ? parcelData.convenienceFee : parcelData.priceDetails.convenienceFee}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Insurance Fee : </td>
+                            <td>{parcelData.insuranceFee ? parcelData.insuranceFee : parcelData.priceDetails.insuranceFee}</td>
+                        </tr>
+                    
                         <tr>
                             <td>Additional Note : </td>
                             <td>{parcelData.additionalNote}</td>

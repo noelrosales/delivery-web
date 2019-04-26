@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import QrReader from 'react-qr-reader';
+import Webcam from 'react-webcam';
 
 import DashboardContainer from '../../components/hoc/Dashboard';
 import ClaimService from '../../services/Claim';
 import Scan from '../../services/Scan';
+import dataURLtoFile  from '../../util/UrlToFile';
 
 import './style.css';
 import ParcelPreview from '../../components/ParcelPreview';
@@ -24,7 +26,9 @@ class Claim extends Component {
             parcelId: '',
             parcelImage: [],
             error: '',
-            step: 1
+            step: 1,
+            photoMode: true,
+            parcelImagePreview: ''
         }
     }
 
@@ -65,6 +69,7 @@ class Claim extends Component {
         Scan.scanCode(scanCode, tripId, scanType)
             .then(res => {
                 console.log(res.data)
+                this.setState({step: 5})
             })
     }
 
@@ -91,9 +96,20 @@ class Claim extends Component {
         }, () => console.log(this.state.error))
     }
 
+    capture = () => {
+        const imgSrc = this.refs.webcam.getScreenshot();
+
+        var parcelImage = dataURLtoFile(imgSrc, 'parcel.png')
+        this.setState({
+            parcelImagePreview: imgSrc,
+            parcelImage: parcelImage, 
+            photoMode: false
+        })
+    }
+
 
     render() { 
-        const {trips, packages, selectedPackage, billOfLading, claimedCount, totalCount, step} = this.state;
+        const {trips, packages, selectedPackage, billOfLading, claimedCount, totalCount, step, photoMode} = this.state;
         return (
             <div className="w3-container">
                 <div className="w3-card-4 claim">
@@ -105,6 +121,7 @@ class Claim extends Component {
                                 { step >= 2 ? <li  className={step === 2 ? 'active' : ''} onClick={()=>this.setState({step:2})}>Packages /</li> : null}
                                 { step >= 3 && step !== 4 ? <li  className={step === 3 ? 'active' : ''} onClick={()=>this.setState({step:3})}>Preview /</li> : null}
                                 { step === 4 ? <li className={step === 4 ? 'active' : ''} onClick={()=>this.setState({step:4})}>Scan /</li> : null}
+                                { step === 5 ? <li className={step === 5 ? 'active' : ''} onClick={()=>this.setState({step:5})}>Verify OTP /</li> : null}
                             </ul>
                         </div>
                         { step === 1
@@ -177,6 +194,72 @@ class Claim extends Component {
                                     value={billOfLading}
                                     onChange={this.handleChange}/>      
                               </div>
+                            : null
+                        }
+                        { step === 5
+                            ? <div className="w3-display-middle">
+                                <h1>OTP's in da hawsxxzz</h1>
+                                <button className="w3-btn w3-green" onClick={()=>this.setState({step:6})}>Verify MAdafuckah</button>
+                              </div>
+                            : null
+                        }
+                        { step === 6
+                            ? <div className="w3-display-middle"> 
+                                Da image of the Effin Parcel
+                                <button className="w3-btn w3-green" onClick={()=>this.setState({step:7})}>Scan nudes</button>
+                              </div>
+                            : null
+                        }
+                        { step === 7
+                            ? <div className="w3-display-middle">
+                                <QrReader
+                                    delay={300}
+                                    onError={this.handleError}
+                                    onScan={this.handleScan}
+                                    style={{width: 350}}
+                                />
+                                <input 
+                                    type="text" 
+                                    name="billOfLading" 
+                                    className="w3-input" 
+                                    value={billOfLading}
+                                    onChange={this.handleChange}/>  
+                                <button className="w3-btn w3-green" onClick={()=>this.setState({step:8})}>Verify MAdafuckah</button>
+                              </div>
+                            : null
+                        }
+                        { step === 8
+                            ? <div className="w3-display-middle"> 
+                                {
+                                    this.state.photoMode ?
+                                        <div>
+                                            <div className="w3-container">
+                                                <Webcam
+                                                    height={350}
+                                                    ref="webcam"
+                                                    screenshotFormat="image/jpeg"
+                                                    width={350}
+                                                /> 
+                                                <div>
+                                                    <button className="w3-btn w3-green" onClick={this.capture}>Capture photo</button>
+                                                </div>
+                                            </div>
+                                        </div> :
+                                        <div>
+                                            <div className="w3-container">
+                                                <div style={{height: '350px', width: '350px', display: 'flex', alignItems: 'center'}}>
+                                                    <img src={this.state.parcelImagePreview} alt="Package snapshot (reference for the package)" />
+                                                </div>
+                                                <button className="w3-btn w3-green" onClick={() => this.setState({photoMode: true})}>Take a photo again</button>
+                                            </div>
+                                        </div>
+                                }
+                                <button className="w3-btn w3-green" onClick={()=>this.setState({step:9})}>Confirm</button>
+                              </div>
+                            : null
+                        }
+                        { step === 9
+                            ? <div>Signature Fuckers</div>
                             : null
                         }
                     </div>

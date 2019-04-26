@@ -59,9 +59,9 @@ class CreateParcelForm extends Component {
                     <div className="w3-row-padding w3-third">
                         <label>Package Insurance</label>
                         <select className="w3-input" name="packageInsurance" value={createData.packageInsurance} onChange={handleChange}>
-                            <option disabled> -- Select Insurance -- </option>
-                            <option value={createData.estimatedValue * .10}>Insurance 1</option>
-                            <option value={0}>None</option>
+                            <option value=""> -- Select Insurance -- </option>
+                            <option value="Insurance 10%">Insurance 1</option>
+                            <option value="none">None</option>
                         </select>
                     </div>
                 </div>
@@ -84,12 +84,23 @@ class CreateParcelForm extends Component {
                         <label>Quantity</label>
                         <input className="w3-input" type="number" name="quantity" value={createData.quantity} onChange={handleChange}/>
                     </div>
+
+                    <div className="w3-row-padding w3-third">
+                        <label>Price</label>
+                        <input className="w3-input" type="number" name="price" value={createData.price} onChange={handleChange}/>
+                    </div>
                 </div>
 
                 <div className="w3-row-padding">
                     <div className="w3-row-padding w3-third">
-                        <label>Price</label>
-                        <input className="w3-input" type="number" name="price" value={createData.price} onChange={handleChange}/>
+                        <label>Convenience Fee</label>
+                        <input className="w3-input" type="number" name="convenienceFee" readOnly value={createData.convenienceFee} />
+                    </div>
+
+                    <div className="w3-row-padding w3-third">
+                        <label>Insurance Fee</label>
+                        <input 
+                            className="w3-input" type="number" name="insuranceFee" readOnly value={createData.insuranceFee} />
                     </div>
                 </div>
 

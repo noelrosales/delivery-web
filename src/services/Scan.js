@@ -19,7 +19,7 @@ const Scan = {
         })
     },
 
-    scanSubParcel : (subParcelId) => {
+    scanSubParcel : (subParcelIds) => {
         return axios({
             method: 'post',
             url: `${Config.api_domain}/server/api/v1/account/delivery-person/parcel/subParcelTagging`,
@@ -29,7 +29,7 @@ const Scan = {
                 'x-auth-token' : Config.api_token
             },
             data: {
-                subParcelId: subParcelId
+                subParcelId: subParcelIds
             }
         })
     },

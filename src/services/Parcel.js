@@ -47,6 +47,8 @@ const ParcelService = {
         bodyFormData.set('startStation', parcelData.startStation)
         bodyFormData.set('endStation', parcelData.endStation)
         bodyFormData.set('checkIn', parcelData.checkIn)
+        bodyFormData.set('convenienceFee', parcelData.convenienceFee)
+        bodyFormData.set('insuranceFee', parcelData.insuranceFee)
                 
         return axios({
             method: 'post',
@@ -76,6 +78,18 @@ const ParcelService = {
                 isAccompanied: isAccompanied,
                 startStation: startStation,
                 weight: weight
+            }
+        })
+    },
+
+    getConvenienceFee: (quantity) => {
+        return axios({
+            method: 'get',
+            url: `${Config.api_domain}/server/api/v1/account/delivery-person/parcel/parcel-convenience-fee/${quantity}`,
+            headers: {
+                'x-auth-deviceid' : '1',
+                'x-auth-devicetype' : '1',
+                'x-auth-token' : Config.api_token
             }
         })
     }

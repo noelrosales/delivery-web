@@ -42,6 +42,8 @@ class Parcel extends Component {
             startStation: '',
             endStation: '',
             checkIn: false,
+            convenienceFee: 0,
+            insuranceFee: 0,
             step: 1,
             photoMode: true,
             busses: [],
@@ -116,7 +118,8 @@ class Parcel extends Component {
                 if(res.data.success){
                     const computedPrice = res.data.data.totalCost;
                     console.log('DYNAMIC PRICE: ',computedPrice)
-                    this.setState({price: computedPrice})
+                    this.setState({price: computedPrice});
+                    this.setInsuranceFee()
                 }
             })
             .catch(err => {
@@ -125,6 +128,25 @@ class Parcel extends Component {
             .then(()=>{
                 console.log('DYNAMIC PRICE CALL ENDED');
             })
+    }
+
+    getConvenienceFee = () => {
+        const {quantity} = this.state;
+        ParcelService.getConvenienceFee(quantity)
+            .then(res => {
+                const convenienceFee = res.data.data.convenienceFee;
+                console.log("CONVENIENCE FEE",convenienceFee);
+                this.setState({
+                    convenienceFee
+                })
+            })
+    }
+
+    setInsuranceFee = () => {
+        const {price, estimatedValue, packageInsurance} = this.state;
+        this.setState({
+            insuranceFee: packageInsurance === "Insurance 10%" ? estimatedValue * .1 : 0
+        })
     }
 
     renderLoading = (message) => {
@@ -165,6 +187,16 @@ class Parcel extends Component {
                     [e.target.name] : e.target.value
                 },() => this.getDynamicPrice())
             } else {
+                if(e.target.name === 'quantity'){
+                    this.setState({
+                        [e.target.name] : e.target.value
+                    },() => this.getConvenienceFee())
+                } else if (e.target.name === 'packageInsurance'){
+                    this.setState({
+                        [e.target.name] : e.target.value
+                    },() => this.setInsuranceFee())
+                }
+
                 this.setState({
                     [e.target.name] : e.target.value
                 })
