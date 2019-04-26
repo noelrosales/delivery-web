@@ -24,6 +24,10 @@
     transition: all .25s ease-in-out
 }
 
+.bus-list .bus-list-item.selected-trip{
+    background: #333;
+}
+
 .bus-list .bus-list-item:hover {
     background: #333;
     box-shadow: inset 0px 0px 8px #333;

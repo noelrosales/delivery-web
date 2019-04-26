@@ -329,7 +329,6 @@ class Parcel extends Component {
                                                     return (
                                                         <div 
                                                             key={index} 
-                                                            className="bus-list-item w3-ripple"
                                                             onClick={()=> {
                                                                 this.nextStep();
                                                                 this.setState({
@@ -341,6 +340,7 @@ class Parcel extends Component {
                                                                     endStation: bus.endStation._id
                                                                 })
                                                             }}
+                                                            className={this.state.tripId === bus._id ? 'bus-list-item w3-ripple selected-trip' : 'bus-list-item w3-ripple'}
                                                         >
                                                             <div>
                                                                 <h3>{`${bus.bus.licenseNumber} - ${bus.bus.busModel}`}</h3>
