@@ -281,7 +281,7 @@ class Parcel extends Component {
                         </div>
                         {
                             step === 1 
-                                ? <CreateParcelForm createData={this.state} handleChange={this.handleChange}/> 
+                                ? <CreateParcelForm createData={this.state} handleChange={this.handleChange} nextStep={this.nextStep}/> 
                                 : null
                         }
                         {
@@ -395,10 +395,16 @@ class Parcel extends Component {
                                         <button onClick={()=>this.setState(this.initialState)} className="w3-btn w3-blue">Save</button>
                                     </div>:
                                     <div>
-                                        <button disabled={ step === 1 } className="w3-btn w3-red" onClick={this.prevStep}>Previous Step</button>
-                                        <button disabled={ step === 5 } className="w3-btn w3-blue" onClick={this.nextStep}>
-                                            {step === 4 ? 'Parcel Preview' : 'Next Step'}
-                                        </button>
+                                        {
+                                            step >= 2
+                                                ?   <div>
+                                                        <button className="w3-btn w3-red" onClick={this.prevStep}>Previous Step</button>
+                                                        <button disabled={ step === 5 } className="w3-btn w3-blue" onClick={this.nextStep}>
+                                                            {step === 4 ? 'Parcel Preview' : 'Next Step'}
+                                                        </button>
+                                                    </div>
+                                                :   null
+                                        }
                                     </div>
                             }
                         </div>
